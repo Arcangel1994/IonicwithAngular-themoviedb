@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Favoritos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="favoritoGenero.length === 0">
+    <ion-slides [options]="sliderOptsSpinner" class="allScreen">
+        <ion-slide>
+            <ion-grid>
+                <ion-row size="12"> <ion-col><ion-spinner name="crescent" color="primary"></ion-spinner></ion-col></ion-row>
+                <ion-row size="12"> <ion-col><h1 color="light">Loading...</h1></ion-col></ion-row>
+            </ion-grid>
+        </ion-slide>
+      </ion-slides>
+</ion-content>
+
+<ion-content *ngIf="favoritoGenero.length > 0">
+
+  <!--<app-slideshow-poster [peliculasRecientes]="peliculas"></app-slideshow-poster>-->
+
+  <div *ngFor="let pelicula of favoritoGenero">
+    <ion-grid *ngIf="pelicula.pelis.length > 0">
+      <ion-row>
+        <ion-col>
+          <h4>{{pelicula.genero}}</h4>
+        </ion-col>
+      </ion-row>
+      <app-slideshow-poster [peliculasRecientes]="pelicula.pelis" (refrescaLista)="refrescarLista($event)"></app-slideshow-poster>
+    </ion-grid>
+  </div>
+
+</ion-content>
